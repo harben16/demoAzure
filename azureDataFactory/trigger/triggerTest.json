@@ -1,0 +1,18 @@
+{
+	"name": "triggerTest",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 6,
+				"startTime": "2023-08-23T23:10:00",
+				"endTime": "2023-08-27T04:00:00",
+				"timeZone": "SA Pacific Standard Time"
+			}
+		}
+	}
+}
