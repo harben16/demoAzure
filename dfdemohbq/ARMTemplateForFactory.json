@@ -1,0 +1,409 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "dfdemohbq"
+		},
+		"bdpostgres_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'bdpostgres'"
+		},
+		"maestros_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'maestros'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/postgresProducts')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "bdpostgres",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzurePostgreSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "demo",
+					"table": "productos"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/bdpostgres')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/products')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "maestros",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Productos_PE_Sample.csv",
+						"container": "bsdemo"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ID_SKU",
+						"type": "String"
+					},
+					{
+						"name": "COD_SKU",
+						"type": "String"
+					},
+					{
+						"name": "DESC_SKU",
+						"type": "String"
+					},
+					{
+						"name": "SKU",
+						"type": "String"
+					},
+					{
+						"name": "ID_MARCA",
+						"type": "String"
+					},
+					{
+						"name": "COD_MARCA",
+						"type": "String"
+					},
+					{
+						"name": "DESC_MARCA",
+						"type": "String"
+					},
+					{
+						"name": "ID_TIPOMARCA",
+						"type": "String"
+					},
+					{
+						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "ID_DIVISION",
+						"type": "String"
+					},
+					{
+						"name": "COD_DIVISION",
+						"type": "String"
+					},
+					{
+						"name": "DESC_DIVISION",
+						"type": "String"
+					},
+					{
+						"name": "DIVISION",
+						"type": "String"
+					},
+					{
+						"name": "COD_DEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "DESC_DEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "ID_DEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "DEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "COD_SUBDEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "DESC_SUBDEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "ID_SUPDEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "SUBDEPARTAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "COD_CLASE",
+						"type": "String"
+					},
+					{
+						"name": "DESC_CLASE",
+						"type": "String"
+					},
+					{
+						"name": "ID_CLASE",
+						"type": "String"
+					},
+					{
+						"name": "CLASE",
+						"type": "String"
+					},
+					{
+						"name": "COD_SUBCLASE",
+						"type": "String"
+					},
+					{
+						"name": "DESC_SUBCLASE",
+						"type": "String"
+					},
+					{
+						"name": "ID_SUBCLASE",
+						"type": "String"
+					},
+					{
+						"name": "SUBCLASE",
+						"type": "String"
+					},
+					{
+						"name": "COD_UNIDADMEDIDA",
+						"type": "String"
+					},
+					{
+						"name": "DESC_UNIDADMEDIDA",
+						"type": "String"
+					},
+					{
+						"name": "ID_UNIDADMEDIDA",
+						"type": "String"
+					},
+					{
+						"name": "UNIDADMEDIDA",
+						"type": "String"
+					},
+					{
+						"name": "PROCEDENCIA",
+						"type": "String"
+					},
+					{
+						"name": "COD_PROVEEDOR",
+						"type": "String"
+					},
+					{
+						"name": "DESC_PROVEEDOR",
+						"type": "String"
+					},
+					{
+						"name": "DESC_CONDPAGO",
+						"type": "String"
+					},
+					{
+						"name": "ID_PROVEEDOR_DEF",
+						"type": "String"
+					},
+					{
+						"name": "DESC_ESTADO",
+						"type": "String"
+					},
+					{
+						"name": "COD_EAN",
+						"type": "String"
+					},
+					{
+						"name": "F_CREACION",
+						"type": "String"
+					},
+					{
+						"name": "ID_TIPOPRODUCTO",
+						"type": "String"
+					},
+					{
+						"name": "FLG_MMPP",
+						"type": "String"
+					},
+					{
+						"name": "F_PRECIO_VENTA_ORIGINAL",
+						"type": "String"
+					},
+					{
+						"name": "F_PRECIO_VENTA",
+						"type": "String"
+					},
+					{
+						"name": "F_PRECIO_COSTO",
+						"type": "String"
+					},
+					{
+						"name": "F_PRECIO_VIGENTE",
+						"type": "String"
+					},
+					{
+						"name": "F_INICIO_PRECIO_VIGENTE",
+						"type": "String"
+					},
+					{
+						"name": "F_FIN_PRECIO_VIGENTE",
+						"type": "String"
+					},
+					{
+						"name": "COD_CATFAZIL",
+						"type": "String"
+					},
+					{
+						"name": "DESC_CATFAZIL",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/maestros')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bdpostgres')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzurePostgreSql",
+				"typeProperties": {
+					"connectionString": "[parameters('bdpostgres_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/maestros')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('maestros_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/df_csv_to_postgres')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "products",
+								"type": "DatasetReference"
+							},
+							"name": "bsproducts"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "postgresProducts",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "fltrDivisionJ01"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          ID_SKU as string,",
+						"          COD_SKU as string,",
+						"          DESC_SKU as string,",
+						"          SKU as string,",
+						"          ID_MARCA as string,",
+						"          COD_MARCA as string,",
+						"          DESC_MARCA as string,",
+						"          ID_TIPOMARCA as string,",
+						"          MARCA as string,",
+						"          ID_DIVISION as string,",
+						"          COD_DIVISION as string,",
+						"          DESC_DIVISION as string,",
+						"          DIVISION as string,",
+						"          COD_DEPARTAMENTO as string,",
+						"          DESC_DEPARTAMENTO as string,",
+						"          ID_DEPARTAMENTO as string,",
+						"          DEPARTAMENTO as string,",
+						"          COD_SUBDEPARTAMENTO as string,",
+						"          DESC_SUBDEPARTAMENTO as string,",
+						"          ID_SUPDEPARTAMENTO as string,",
+						"          SUBDEPARTAMENTO as string,",
+						"          COD_CLASE as string,",
+						"          DESC_CLASE as string,",
+						"          ID_CLASE as string,",
+						"          CLASE as string,",
+						"          COD_SUBCLASE as string,",
+						"          DESC_SUBCLASE as string,",
+						"          ID_SUBCLASE as string,",
+						"          SUBCLASE as string,",
+						"          COD_UNIDADMEDIDA as string,",
+						"          DESC_UNIDADMEDIDA as string,",
+						"          ID_UNIDADMEDIDA as string,",
+						"          UNIDADMEDIDA as string,",
+						"          PROCEDENCIA as string,",
+						"          COD_PROVEEDOR as string,",
+						"          DESC_PROVEEDOR as string,",
+						"          DESC_CONDPAGO as string,",
+						"          ID_PROVEEDOR_DEF as string,",
+						"          DESC_ESTADO as string,",
+						"          COD_EAN as string,",
+						"          F_CREACION as string,",
+						"          ID_TIPOPRODUCTO as string,",
+						"          FLG_MMPP as string,",
+						"          F_PRECIO_VENTA_ORIGINAL as string,",
+						"          F_PRECIO_VENTA as string,",
+						"          F_PRECIO_COSTO as string,",
+						"          F_PRECIO_VIGENTE as string,",
+						"          F_INICIO_PRECIO_VIGENTE as string,",
+						"          F_FIN_PRECIO_VIGENTE as string,",
+						"          COD_CATFAZIL as string,",
+						"          DESC_CATFAZIL as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> bsproducts",
+						"bsproducts filter(DESC_DIVISION=='J01') ~> fltrDivisionJ01",
+						"fltrDivisionJ01 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/products')]",
+				"[concat(variables('factoryId'), '/datasets/postgresProducts')]"
+			]
+		}
+	]
+}
