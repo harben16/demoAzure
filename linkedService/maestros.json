@@ -1,0 +1,12 @@
+{
+	"name": "maestros",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=hbqdemo;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDZCNkRGQUI5LTczNzgtNDc5RS1BMkU2LTI3RjM5ODQ1RTc3OF85OTlmYWIwYy0wMjE3LTQ5MGEtOGVhYy1lMGVkYmRjNDYzZTgiDQp9"
+		}
+	}
+}
