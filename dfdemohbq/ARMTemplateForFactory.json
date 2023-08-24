@@ -354,20 +354,30 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "ppl demo productos",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Hour",
 						"interval": 6,
-						"startTime": "2023-08-23T23:10:00",
+						"startTime": "2023-08-23T23:50:00",
 						"endTime": "2023-08-27T04:00:00",
 						"timeZone": "SA Pacific Standard Time"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/ppl demo productos')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/df_csv_to_postgres')]",
