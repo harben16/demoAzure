@@ -466,7 +466,7 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> bsproducts",
-						"bsproducts filter(DESC_DIVISION=='J01') ~> fltrDivisionJ01",
+						"bsproducts filter(COD_DIVISION=='J01') ~> fltrDivisionJ01",
 						"fltrDivisionJ01 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     deletable:false,",
