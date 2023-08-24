@@ -1,0 +1,99 @@
+{
+	"name": "df_csv_to_postgres",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "products",
+						"type": "DatasetReference"
+					},
+					"name": "bsproducts"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "postgresProducts",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "fltrDivisionJ01"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID_SKU as string,",
+				"          COD_SKU as string,",
+				"          DESC_SKU as string,",
+				"          SKU as string,",
+				"          ID_MARCA as string,",
+				"          COD_MARCA as string,",
+				"          DESC_MARCA as string,",
+				"          ID_TIPOMARCA as string,",
+				"          MARCA as string,",
+				"          ID_DIVISION as string,",
+				"          COD_DIVISION as string,",
+				"          DESC_DIVISION as string,",
+				"          DIVISION as string,",
+				"          COD_DEPARTAMENTO as string,",
+				"          DESC_DEPARTAMENTO as string,",
+				"          ID_DEPARTAMENTO as string,",
+				"          DEPARTAMENTO as string,",
+				"          COD_SUBDEPARTAMENTO as string,",
+				"          DESC_SUBDEPARTAMENTO as string,",
+				"          ID_SUPDEPARTAMENTO as string,",
+				"          SUBDEPARTAMENTO as string,",
+				"          COD_CLASE as string,",
+				"          DESC_CLASE as string,",
+				"          ID_CLASE as string,",
+				"          CLASE as string,",
+				"          COD_SUBCLASE as string,",
+				"          DESC_SUBCLASE as string,",
+				"          ID_SUBCLASE as string,",
+				"          SUBCLASE as string,",
+				"          COD_UNIDADMEDIDA as string,",
+				"          DESC_UNIDADMEDIDA as string,",
+				"          ID_UNIDADMEDIDA as string,",
+				"          UNIDADMEDIDA as string,",
+				"          PROCEDENCIA as string,",
+				"          COD_PROVEEDOR as string,",
+				"          DESC_PROVEEDOR as string,",
+				"          DESC_CONDPAGO as string,",
+				"          ID_PROVEEDOR_DEF as string,",
+				"          DESC_ESTADO as string,",
+				"          COD_EAN as string,",
+				"          F_CREACION as string,",
+				"          ID_TIPOPRODUCTO as string,",
+				"          FLG_MMPP as string,",
+				"          F_PRECIO_VENTA_ORIGINAL as string,",
+				"          F_PRECIO_VENTA as string,",
+				"          F_PRECIO_COSTO as string,",
+				"          F_PRECIO_VIGENTE as string,",
+				"          F_INICIO_PRECIO_VIGENTE as string,",
+				"          F_FIN_PRECIO_VIGENTE as string,",
+				"          COD_CATFAZIL as string,",
+				"          DESC_CATFAZIL as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> bsproducts",
+				"bsproducts filter(DESC_DIVISION=='J01') ~> fltrDivisionJ01",
+				"fltrDivisionJ01 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

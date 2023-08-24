@@ -1,0 +1,17 @@
+{
+	"name": "postgresProducts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "bdpostgres",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzurePostgreSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "demo",
+			"table": "productos"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

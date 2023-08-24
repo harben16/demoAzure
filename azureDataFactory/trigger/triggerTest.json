@@ -1,0 +1,25 @@
+{
+	"name": "triggerTest",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ppl demo productos",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 6,
+				"startTime": "2023-08-23T23:50:00",
+				"endTime": "2023-08-27T04:00:00",
+				"timeZone": "SA Pacific Standard Time"
+			}
+		}
+	}
+}
